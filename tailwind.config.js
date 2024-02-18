@@ -51,6 +51,19 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        lochmara: {
+          '50': '#f2f8fd',
+          '100': '#e3eefb',
+          '200': '#c1ddf6',
+          '300': '#8ac1ef',
+          '400': '#4ca1e4',
+          '500': '#2586d2',
+          '600': '#1769b2',
+          '700': '#145490',
+          '800': '#144878',
+          '900': '#163d64',
+          '950': '#0f2742',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -66,10 +79,21 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        "ripple": {
+          "0%": {
+            transform: "scale(0)",
+            opacity: "1",
+          },
+          "100%": {
+            transform: "scale(2)",
+            opacity: "0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "ripple": "ripple 0.5s ease-out",
       },
     },
   },
