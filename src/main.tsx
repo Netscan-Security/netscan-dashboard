@@ -1,13 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import App from "./App.tsx";
+
+// Local imports
 import "./index.css";
+import App from "./App.tsx";
+import SignInPage from "./pages/sign-in.tsx";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+  },
+  {
+    path: "/sign-in",
+    element: <SignInPage />,
   },
 ]);
 
