@@ -39,7 +39,7 @@ const SignInPage: React.FC = () => {
         <NetscanIcon size={48} className="mx-auto" />
         <NetscanRipplePattern />
       </div>
-      <div className="w-[30%]">
+      <div className="w-full sm:w-[350px] container ">
         <div className="text-center">
           <h1 className="mb-4 text-3xl font-bold">Sign In</h1>
           <p className="mb-4">Welcome! Please enter your details.</p>
@@ -77,8 +77,8 @@ const SignInPage: React.FC = () => {
               control={form.control}
               name="remember30days"
               render={({ field }) => (
-                <FormItem className="flex items-center justify-between border">
-                  <div className="flex items-center space-x-3 border">
+                <FormItem className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
                     <FormControl>
                       <Checkbox
                         checked={field.value}
@@ -89,7 +89,7 @@ const SignInPage: React.FC = () => {
                   </div>
                   <Link
                     to="/forgot-password"
-                    className="mb-1 text-sm font-semibold leading-none border text-lochmara-600"
+                    className="!mt-0 text-sm font-semibold leading-none text-lochmara-600"
                   >
                     Forgot Password
                   </Link>
