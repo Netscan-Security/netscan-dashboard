@@ -4,6 +4,8 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Homepage from "./pages/homepage";
 import SignInPage from "./pages/sign-in";
 import Sidebar from "./layouts/side-bar";
+import Targets from "./pages/authenticated/targets";
+import Vulnerabilities from "./pages/authenticated/vulnerabilities";
 
 function App() {
   const router = createBrowserRouter([
@@ -14,6 +16,14 @@ function App() {
         {
           index: true,
           element: <Homepage />,
+        },
+        {
+          path: "/targets",
+          element: <Targets />,
+        },
+        {
+          path: "/vulnerabilities",
+          element: <Vulnerabilities />,
         },
       ],
     },
