@@ -51,7 +51,7 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        lochmara: {
+        blue: {
           '50': '#f2f8fd',
           '100': '#e3eefb',
           '200': '#c1ddf6',

@@ -89,7 +89,7 @@ const SignInPage: React.FC = () => {
                   </div>
                   <Link
                     to="/forgot-password"
-                    className="!mt-0 text-sm font-semibold leading-none text-lochmara-600"
+                    className="!mt-0 text-sm font-semibold leading-none text-blue-600"
                   >
                     Forgot Password
                   </Link>
@@ -101,7 +101,7 @@ const SignInPage: React.FC = () => {
             </Button>
             <p className="text-sm text-center">
               Copyright ©{new Date().getFullYear()}{" "}
-              <span className="font-semibold text-lochmara-600">
+              <span className="font-semibold text-blue-600">
                 Netscan Security
               </span>
             </p>
