@@ -1,3 +1,5 @@
+@import url("https://fonts.cdnfonts.com/css/space-grotesk");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -69,6 +71,7 @@
 @layer base {
   * {
     @apply border-border;
+    font-family: "Space Grotesk", sans-serif;
   }
   body {
     @apply bg-background text-foreground;

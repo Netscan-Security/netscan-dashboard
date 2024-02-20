@@ -65,6 +65,10 @@ module.exports = {
           '950': '#0f2742',
         },
       },
+      fontFamily: {
+        // Space Grotesk
+        "space-grotesk": ["Space Grotesk", "sans-serif"],
+      },
       borderRadius: {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
