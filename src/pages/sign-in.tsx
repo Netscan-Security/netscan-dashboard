@@ -39,7 +39,7 @@ const SignInPage: React.FC = () => {
         <NetscanIcon size={48} className="mx-auto" />
         <NetscanRipplePattern />
       </div>
-      <div className="w-full sm:w-[350px] container ">
+      <div className="w-full sm:w-[400px] container ">
         <div className="text-center">
           <h1 className="mb-4 text-3xl font-bold">Sign In</h1>
           <p className="mb-4">Welcome! Please enter your details.</p>
