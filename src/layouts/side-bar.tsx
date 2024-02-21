@@ -32,7 +32,7 @@ const Sidebar: React.FC = () => {
   ];
 
   return (
-    <div className="flex h-screen bg-gray-200">
+    <div className="flex h-screen bg-gray-50">
       <div className="flex flex-col justify-between p-4 bg-white w-fit">
         <div>
           <div className="px-2 py-4">
@@ -61,8 +61,6 @@ const Sidebar: React.FC = () => {
                     </span>
                   </>
                 )}
-                {/* <item.icon className="w-6 h-6 text-gray-500 group-hover:text-blue-400" />
-              <span className="ml-4">{item.name}</span> */}
               </NavLink>
             ))}
           </div>
