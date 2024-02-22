@@ -1,5 +1,7 @@
-import { ArrowLeft, XCircle } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import { useRouteError, useNavigate } from "react-router-dom";
+
+// Local imports
 import { Button } from "../ui/button";
 
 const ErrorPage = () => {
@@ -9,27 +11,15 @@ const ErrorPage = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen bg-gray-100">
       <div className="text-center">
-        <div className="p-1 mx-auto bg-red-100 rounded-md w-fit">
-          <XCircle size={32} className="text-red-500" />
-        </div>
-        <h1 className="mb-4 text-4xl font-bold text-red-500">Oops!</h1>
-        <p className="mb-8 text-lg text-gray-700">Something went wrong.</p>
-        <div className="flex items-center justify-center space-x-4">
-          <Button variant="outline" onClick={() => navigate(-1)}>
-            <ArrowLeft className="mr-2" />
-            Go Back
-          </Button>
-          <Button
-            variant="destructive"
-            onClick={() =>
-              navigate("/", {
-                replace: true,
-              })
-            }
-          >
-            Take me home
-          </Button>
-        </div>
+        <h1 className="mb-5 font-bold text-yellow-600 text-9xl">Oops!</h1>
+        <p className="text-xl text-gray-700 mb-7">Something went wrong.</p>
+        <Button
+          className="text-yellow-700 bg-yellow-400/40 hover:bg-yellow-400"
+          onClick={() => navigate(window.location.pathname)}
+        >
+          Retry
+          <RefreshCcw size={16} className="ml-2" />
+        </Button>
       </div>
     </div>
   );
