@@ -36,7 +36,16 @@ const Sidebar: React.FC = () => {
       <div className="flex flex-col justify-between p-4 bg-white w-fit">
         <div>
           <div className="px-2 py-4">
-            <img src="/brand/logo/logo-brand.svg" alt="Brand Logo" />
+            <img
+              src="/brand/logo/logo-brand.svg"
+              alt="Brand Logo"
+              className="hidden sm:block"
+            />
+            <img
+              src="/netscan-logo.svg"
+              alt="Brand Logo"
+              className="block sm:hidden"
+            />
           </div>
           <div className="flex flex-col flex-grow gap-1 ">
             {sidebarData.map((item, index) => (
@@ -56,7 +65,11 @@ const Sidebar: React.FC = () => {
                         isActive && "text-blue-400"
                       }`}
                     />
-                    <span className={`ml-4 ${isActive && "text-blue-600"}`}>
+                    <span
+                      className={`ml-4 ${
+                        isActive && "text-blue-600"
+                      } hidden sm:block`}
+                    >
                       {item.name}
                     </span>
                   </>
@@ -81,7 +94,11 @@ const Sidebar: React.FC = () => {
                     isActive && "text-blue-400"
                   }`}
                 />
-                <span className={`ml-4 ${isActive && "text-blue-600"}`}>
+                <span
+                  className={`ml-4 ${
+                    isActive && "text-blue-600"
+                  } hidden sm:block`}
+                >
                   Support
                 </span>
               </>
@@ -102,7 +119,11 @@ const Sidebar: React.FC = () => {
                     isActive && "text-blue-400"
                   }`}
                 />
-                <span className={`ml-4 ${isActive && "text-blue-600"}`}>
+                <span
+                  className={`ml-4 ${
+                    isActive && "text-blue-600"
+                  } hidden sm:block`}
+                >
                   Settings
                 </span>
               </>
@@ -126,7 +147,7 @@ const SidebarAccount = () => {
         <AvatarImage src="https://avatars.githubusercontent.com/u/22730819?v=4" />
         <AvatarFallback>JM</AvatarFallback>
       </Avatar>
-      <div>
+      <div className="hidden sm:block">
         <h2 className="text-sm font-semibold">Jackson Makinda</h2>
         <p className="text-xs">jackson@netscan.security </p>
       </div>
@@ -137,7 +158,7 @@ const SidebarAccount = () => {
             navigate("/sign-in");
           }
         }}
-        className="ml-5 text-red-600 cursor-pointer"
+        className="hidden ml-5 text-red-600 cursor-pointer sm:block"
       />
     </div>
   );
