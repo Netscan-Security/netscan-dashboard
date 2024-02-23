@@ -1,6 +1,6 @@
 import { CSSProperties } from "react";
 
-import NetscanLogo from "./netscan-logo.svg";
+import NetScanLogo from "./netscan-logo.svg";
 
 export type BaseIconType = {
   size?: number;
@@ -8,15 +8,15 @@ export type BaseIconType = {
   style?: CSSProperties;
 };
 
-export const NetscanIcon: React.FC<BaseIconType> = ({
+export const NetScanIcon: React.FC<BaseIconType> = ({
   size = 24,
   className,
   style,
 }) => {
   return (
     <img
-      src={NetscanLogo}
-      alt="Netscan Logo"
+      src={NetScanLogo}
+      alt="NetScan Logo"
       className={className}
       style={{ width: size, height: size, ...style }}
     />

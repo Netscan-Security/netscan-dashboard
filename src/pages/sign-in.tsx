@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
 
 // Local imports
-import { NetscanIcon } from "@/assets/brand";
+import { NetScanIcon } from "@/assets/brand";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
-import NetscanRipplePattern from "@/components/ui/ripple-pattern";
+import NetScanRipplePattern from "@/components/ui/ripple-pattern";
 import {
   Form,
   FormControl,
@@ -36,8 +36,8 @@ const SignInPage: React.FC = () => {
   return (
     <div className="flex flex-col items-center justify-center h-screen overflow-hidden">
       <div className="relative w-full mx-auto -z-10">
-        <NetscanIcon size={48} className="mx-auto" />
-        <NetscanRipplePattern />
+        <NetScanIcon size={48} className="mx-auto" />
+        <NetScanRipplePattern />
       </div>
       <div className="w-full sm:w-[400px] container ">
         <div className="text-center">
@@ -102,7 +102,7 @@ const SignInPage: React.FC = () => {
             <p className="text-sm text-center">
               Copyright ©{new Date().getFullYear()}{" "}
               <span className="font-semibold text-blue-600">
-                Netscan Security
+                NetScan Security
               </span>
             </p>
           </form>

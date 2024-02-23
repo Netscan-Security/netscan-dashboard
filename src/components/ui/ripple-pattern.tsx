@@ -1,10 +1,10 @@
 import { cn } from "@/lib/utils";
 
-type NetscanRipplePatternProps = {
+type NetScanRipplePatternProps = {
   className?: string;
 };
 
-const NetscanRipplePattern = ({ className }: NetscanRipplePatternProps) => {
+const NetScanRipplePattern = ({ className }: NetScanRipplePatternProps) => {
   return (
     <div className={className}>
       {Array.from({ length: 6 }).map((_, i) => (
@@ -28,4 +28,4 @@ const NetscanRipplePattern = ({ className }: NetscanRipplePatternProps) => {
   );
 };
 
-export default NetscanRipplePattern;
+export default NetScanRipplePattern;
