@@ -3,15 +3,15 @@ import DashboardCard from "@/components/dashboard-card";
 const Dashboard = () => {
   return (
     <>
-      <div className="flex flex-col justify-between space-y-3 sm:space-y-0 sm:items-center sm:flex-row">
+      <div className="flex flex-col justify-between gap-1 space-y-3 md:gap-4 lg:gap-0 sm:space-y-0 lg:items-center lg:flex-row">
         <div>
-          <h1 className="text-2xl font-semibold">Dashboard</h1>
-          <p className="text-sm">Welcome admin, Jackson</p>
+          <h1 className="text-4xl font-semibold">Dashboard</h1>
+          <p className="text-lg">Welcome admin, Jackson</p>
         </div>
         <DaysFilter />
       </div>
       <div>
-        <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 mt-4 text-center md:grid-cols-2 xl:grid-cols-4">
           <DashboardCard
             title="High Severity Vulnerabilities"
             percent={23}
@@ -28,16 +28,15 @@ const Dashboard = () => {
             color="text-green-600"
           />
           <DashboardCard
-            title="Total Scaned Vulnerabilities"
+            title="Total Scanned Vulnerabilities"
             percent={5}
             color="text-blue-600"
           />
         </div>
         <div className="mt-4">
-          <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-5">
+          <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
             <StatsCard title="Scans Running" value={1} />
             <StatsCard title="Scans Waiting" value={3} />
-            <StatsCard title="Total Scans Conducted" value={5} />
             <StatsCard title="Open Vulnerabilities" value={29} />
             <StatsCard title="Total Targets" value={5} />
           </div>
@@ -49,7 +48,7 @@ const Dashboard = () => {
 
 const StatsCard = ({ title, value }: { title: string; value: number }) => {
   return (
-    <div className="p-4 text-center bg-white rounded-md shadow-sm gap-y-5">
+    <div className="p-4 text-center gap-y-5">
       <h3 className="text-sm font-semibold text-gray-600">{title}</h3>
       <h3 className="text-2xl font-semibold text-blue-400">{value}</h3>
     </div>

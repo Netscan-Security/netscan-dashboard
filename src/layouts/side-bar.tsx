@@ -33,7 +33,7 @@ const Sidebar: React.FC = () => {
 
   return (
     <div className="flex h-screen bg-gray-50">
-      <div className="flex flex-col justify-between p-4 bg-white w-fit">
+      <div className="flex flex-col justify-between p-2 bg-white sm:p-4 xl:p-6 w-fit">
         <div>
           <div className="px-2 py-4">
             <img
@@ -132,7 +132,7 @@ const Sidebar: React.FC = () => {
           <SidebarAccount />
         </div>
       </div>
-      <div className="flex flex-col flex-grow p-4">
+      <div className="flex flex-col flex-grow p-2 sm:p-4 xl:p-6">
         <Outlet />
       </div>
     </div>
