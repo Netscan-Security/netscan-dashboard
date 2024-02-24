@@ -7,6 +7,7 @@ import {
   LifeBuoy,
   LogOut,
   Settings,
+  PcCase,
 } from "lucide-react";
 
 // Local imports
@@ -18,6 +19,11 @@ const Sidebar: React.FC = () => {
       name: "Dashboard",
       icon: BarChartBig,
       path: "/",
+    },
+    {
+      name: "Hosts",
+      icon: PcCase,
+      path: "/hosts",
     },
     {
       name: "Targets",
