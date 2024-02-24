@@ -1,7 +1,20 @@
 import StatsCard from "@/components/stats-card";
 import DashboardCard from "@/components/dashboard-card";
+import { useHostMachines } from "@/services/context/host-machines";
 
 const Dashboard = () => {
+  const { hostMachinesInfo } = useHostMachines();
+
+  const totalScannedVulnerabilities = hostMachinesInfo?.reduce(
+    (acc, machine) => acc + (machine.scanInfo?.vulnerabilities ?? 0),
+    0
+  );
+
+  const totalRunningScans = hostMachinesInfo?.reduce(
+    (acc, machine) => acc + (machine.scanInfo?.running ?? 0),
+    0
+  );
+
   return (
     <>
       <div className="flex flex-col justify-between gap-1 space-y-3 md:gap-4 lg:gap-0 sm:space-y-0 lg:items-center lg:flex-row">
@@ -36,10 +49,13 @@ const Dashboard = () => {
         </div>
         <div className="mt-4">
           <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
-            <StatsCard title="Scans Running" value={1} />
-            <StatsCard title="Scans Waiting" value={3} />
-            <StatsCard title="Open Vulnerabilities" value={29} />
-            <StatsCard title="Total Targets" value={5} />
+            <StatsCard title="Scans Running" value={totalRunningScans} />
+            <StatsCard title="Scans Waiting" value={0} />
+            <StatsCard
+              title="Open Vulnerabilities"
+              value={totalScannedVulnerabilities}
+            />
+            <StatsCard title="Total Targets" value={0} />
           </div>
         </div>
       </div>

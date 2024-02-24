@@ -1,3 +1,4 @@
+import { toast } from "sonner";
 import { Button } from "./ui/button";
 
 const DashboardCard = ({
@@ -15,7 +16,12 @@ const DashboardCard = ({
         <PercentageCircle color={color} percent={percent} />
       </div>
       <h3 className="text-sm font-semibold text-gray-600">{title}</h3>
-      <Button variant="outline" size="sm" className="w-fit">
+      <Button
+        variant="outline"
+        size="sm"
+        className="w-fit"
+        onClick={() => toast.message("Not Implemented")}
+      >
         View
       </Button>
     </div>
