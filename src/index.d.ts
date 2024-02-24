@@ -18,4 +18,10 @@ type HostMachine = {
     ram: string;
     os: string;
   };
+  scanInfo?: {
+    running: number;
+    total: number;
+    vulnerabilities: number;
+    targets: number;
+  };
 };

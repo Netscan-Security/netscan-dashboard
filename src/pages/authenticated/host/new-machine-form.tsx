@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { toast } from "sonner";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -16,7 +17,6 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
-import { toast } from "sonner";
 
 const machineFormSchema = z.object({
   name: z.string({
@@ -50,6 +50,12 @@ const AddNewMachine = ({ closeModal }: { closeModal: () => void }) => {
             os: "Windows",
             cpu: "Intel Core i5",
             ram: "8",
+          },
+          scanInfo: {
+            running: 0,
+            total: 0,
+            vulnerabilities: 0,
+            targets: 0,
           },
         },
       ];

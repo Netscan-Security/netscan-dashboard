@@ -17,6 +17,7 @@ const Host = () => {
     // status,
     // lastScanned,
     machineSpecs,
+    scanInfo,
   } = hostMachines!.find((machine) => machine.id === Number(machineId))!;
 
   return (
@@ -32,10 +33,13 @@ const Host = () => {
         <Button variant="default">Scan Machine</Button>
       </div>
       <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatsCard title="Scans Running" value={0} />
-        <StatsCard title="Total Scans" value={30} />
-        <StatsCard title="Open Vulnerabilities" value={29} />
-        <StatsCard title="Total Targets" value={5} />
+        <StatsCard title="Scans Running" value={scanInfo?.running} />
+        <StatsCard title="Total Scans" value={scanInfo?.total} />
+        <StatsCard
+          title="Open Vulnerabilities"
+          value={scanInfo?.vulnerabilities}
+        />
+        <StatsCard title="Total Targets" value={scanInfo?.targets} />
       </div>
       <div className="p-6">
         <h1 className="mb-4 text-2xl font-bold">Machine Details</h1>

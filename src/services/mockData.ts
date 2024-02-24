@@ -10,6 +10,12 @@ const hostMachines: HostMachine[] = [
       ram: "8",
       os: "Windows 10",
     },
+    scanInfo: {
+      running: 0,
+      total: 23,
+      vulnerabilities: 2,
+      targets: 0,
+    },
   },
   {
     id: 2,
@@ -22,6 +28,12 @@ const hostMachines: HostMachine[] = [
       ram: "16",
       os: "Windows 11",
     },
+    scanInfo: {
+      running: 0,
+      total: 2,
+      vulnerabilities: 2,
+      targets: 0,
+    },
   },
   {
     id: 3,
@@ -29,6 +41,7 @@ const hostMachines: HostMachine[] = [
     ipAddress: "192.168.0.3",
     status: "Online",
     machineSpecs: { cpu: "Intel Core i3", ram: "4", os: "Windows 10" },
+    scanInfo: { running: 0, total: 0, vulnerabilities: 0, targets: 0 },
   },
 ];
 
