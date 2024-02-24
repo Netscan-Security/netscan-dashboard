@@ -4,10 +4,11 @@ import { useNavigate, useParams } from "react-router-dom";
 // Local imports
 import { Button } from "@/components/ui/button";
 import StatsCard from "@/components/stats-card";
-import { hostMachines } from "@/services/mockData";
+import { useHostMachines } from "@/services/context/host-machines";
 
 const Host = () => {
   const navigate = useNavigate();
+  const { hostMachinesInfo: hostMachines } = useHostMachines();
   const machineId = useParams<{ id: string }>()?.id ?? "";
 
   const {
@@ -16,7 +17,7 @@ const Host = () => {
     // status,
     // lastScanned,
     machineSpecs,
-  } = hostMachines.find((machine) => machine.id === Number(machineId))!;
+  } = hostMachines!.find((machine) => machine.id === Number(machineId))!;
 
   return (
     <div>

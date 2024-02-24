@@ -6,6 +6,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { DialogFooter } from "@/components/ui/dialog";
+import { useHostMachines } from "@/services/context/host-machines";
 import {
   Form,
   FormControl,
@@ -24,7 +25,8 @@ const machineFormSchema = z.object({
   ipAddress: z.string().ip("Invalid IP Address"),
 });
 
-const AddNewMachine = () => {
+const AddNewMachine = ({ closeModal }: { closeModal: () => void }) => {
+  const { setHostMachinesInfo } = useHostMachines();
   const form = useForm<z.infer<typeof machineFormSchema>>({
     resolver: zodResolver(machineFormSchema),
     defaultValues: {
@@ -34,7 +36,24 @@ const AddNewMachine = () => {
   });
 
   function onSubmit(values: z.infer<typeof machineFormSchema>) {
-    console.log(values);
+    setHostMachinesInfo((prev) => {
+      return [
+        ...(prev || []),
+        {
+          id: (prev || []).length + 1,
+          name: values.name,
+          ipAddress: values.ipAddress,
+          status: "Online",
+          lastScanned: new Date().toISOString(),
+          machineSpecs: {
+            os: "Windows",
+            cpu: "Intel Core i5",
+            ram: "8",
+          },
+        },
+      ];
+    });
+    closeModal();
   }
 
   return (
