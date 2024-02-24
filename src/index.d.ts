@@ -6,3 +6,16 @@ interface Pagination {
   setPageSize: Dispatch<SetStateAction<number>>;
   fetching: boolean;
 }
+
+type HostMachine = {
+  id: number;
+  name: string;
+  ipAddress: string;
+  status: string;
+  lastScanned?: string;
+  machineSpecs?: {
+    cpu: string;
+    ram: string;
+    os: string;
+  };
+};
