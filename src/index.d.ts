@@ -19,7 +19,7 @@ type HostMachine = {
     os: string;
   };
   scanInfo?: {
-    running: number;
+    running: boolean;
     total: number;
     vulnerabilities: number;
     targets: number;
