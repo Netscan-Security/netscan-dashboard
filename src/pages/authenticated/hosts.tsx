@@ -1,38 +1,24 @@
 import React from "react";
-import { ColumnDef } from "@tanstack/react-table";
+import type { ColumnDef } from "@tanstack/react-table";
 
 // Local imports
 import { DataTable } from "@/components/ui/table/data-table";
-
-interface HostMachine {
-  id: number;
-  name: string;
-  ipAddress: string;
-  status: string;
-  lastScanned?: string;
-}
-
-const hostMachines: HostMachine[] = [
-  {
-    id: 1,
-    name: "Machine 1",
-    ipAddress: "192.168.0.1",
-    lastScanned: "2024-02-01T04:40:30Z",
-    status: "Online",
-  },
-  {
-    id: 2,
-    name: "Machine 2",
-    ipAddress: "192.168.0.2",
-    lastScanned: "2024-02-01T09:40:30Z",
-    status: "Offline",
-  },
-  { id: 3, name: "Machine 3", ipAddress: "192.168.0.3", status: "Online" },
-];
+import { Link } from "react-router-dom";
+import { hostMachines } from "@/services/mockData";
 
 const columns: ColumnDef<HostMachine>[] = [
   { header: "ID", accessorKey: "id" },
-  { header: "Name", accessorKey: "name" },
+  {
+    header: "Name",
+    accessorKey: "name",
+    cell: ({ row }) => {
+      return (
+        <Link to={`/hosts/${row.original.id}`} className="text-blue-600">
+          {row.original.name}
+        </Link>
+      );
+    },
+  },
   { header: "IP Address", accessorKey: "ipAddress" },
   {
     header: "Status",
@@ -66,7 +52,13 @@ const columns: ColumnDef<HostMachine>[] = [
 
 const Hosts: React.FC = () => {
   return (
-    <div>
+    <>
+      <div className="mb-4">
+        <h1 className="text-4xl font-semibold">Hosts</h1>
+        <p className="text-lg">
+          The agents that are installed in different machines
+        </p>
+      </div>
       <DataTable
         columns={columns}
         data={hostMachines.map((machine) => ({
@@ -77,7 +69,7 @@ const Hosts: React.FC = () => {
           status: machine.status,
         }))}
       />
-    </div>
+    </>
   );
 };
 

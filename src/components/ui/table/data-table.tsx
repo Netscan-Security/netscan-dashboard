@@ -1,12 +1,12 @@
 "use client";
 
+import { Dispatch, ReactNode, SetStateAction } from "react";
+import type { ColumnDef, SortingState } from "@tanstack/react-table";
 import {
-  ColumnDef,
   flexRender,
   getCoreRowModel,
   useReactTable,
 } from "@tanstack/react-table";
-
 import {
   Table,
   TableBody,
@@ -14,27 +14,64 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table/table";
+} from "./table";
+import { cn } from "@/lib/utils";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  sorting?: SortingState;
+  setSorting?: Dispatch<SetStateAction<SortingState>>;
+  loading?: boolean;
+  pagination?: Pagination;
+  height?: number;
+  onRowClick?: (record: TData) => void;
+  debounceDuration?: number;
+  className?: string;
+  headerClassname?: string;
+  rowClassName?: string;
+  noDataMessage?: ReactNode;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-}: DataTableProps<TData, TValue>) {
+  sorting,
+  setSorting,
+  loading,
+  pagination,
+  // height,
+  // onRowClick,
+  // debounceDuration = 400,
+  className,
+  headerClassname,
+}: // noDataMessage,
+// rowClassName,
+DataTableProps<TData, TValue>) {
   const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    onSortingChange: setSorting,
+    manualSorting: true,
+    pageCount: pagination?.total || data?.length,
+
+    state: {
+      sorting,
+      pagination: {
+        pageSize: pagination?.pageSize ? pagination?.pageSize : 15,
+        pageIndex: pagination?.page ? pagination?.page - 1 : 0,
+      },
+    },
   });
 
   return (
     <div className="border rounded-md">
-      <Table>
-        <TableHeader>
+      <Table
+        className={cn(pagination?.fetching || (loading && "opacity-50"))}
+        containerClassName={className}
+      >
+        <TableHeader className={cn(headerClassname)}>
           {table.getHeaderGroups().map((headerGroup) => (
             <TableRow key={headerGroup.id}>
               {headerGroup.headers.map((header) => {

@@ -1,3 +1,4 @@
+import StatsCard from "@/components/stats-card";
 import DashboardCard from "@/components/dashboard-card";
 
 const Dashboard = () => {
@@ -43,15 +44,6 @@ const Dashboard = () => {
         </div>
       </div>
     </>
-  );
-};
-
-const StatsCard = ({ title, value }: { title: string; value: number }) => {
-  return (
-    <div className="p-4 text-center gap-y-5">
-      <h3 className="text-sm font-semibold text-gray-600">{title}</h3>
-      <h3 className="text-2xl font-semibold text-blue-400">{value}</h3>
-    </div>
   );
 };
 

@@ -9,6 +9,7 @@ import Dashboard from "./pages/authenticated/dashboard";
 import NotFoundPage from "./components/templates/not-found";
 import Vulnerabilities from "./pages/authenticated/vulnerabilities";
 import Hosts from "./pages/authenticated/hosts";
+import Host from "./pages/authenticated/host";
 
 function App() {
   const router = createBrowserRouter([
@@ -28,6 +29,10 @@ function App() {
         {
           path: "/hosts",
           element: <Hosts />,
+        },
+        {
+          path: "/hosts/:id",
+          element: <Host />,
         },
         {
           path: "/vulnerabilities",
