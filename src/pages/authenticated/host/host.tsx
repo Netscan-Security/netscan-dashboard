@@ -5,10 +5,12 @@ import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import StatsCard from "@/components/stats-card";
 import { useHostMachines } from "@/services/context/host-machines";
+import { toast } from "sonner";
 
 const Host = () => {
   const navigate = useNavigate();
-  const { hostMachinesInfo: hostMachines } = useHostMachines();
+  const { hostMachinesInfo: hostMachines, setHostMachinesInfo } =
+    useHostMachines();
   const machineId = useParams<{ id: string }>()?.id ?? "";
 
   const {
@@ -30,7 +32,54 @@ const Host = () => {
           <h1 className="text-4xl font-semibold">{name}</h1>
         </div>
 
-        <Button variant="default">Scan Machine</Button>
+        <Button
+          variant="default"
+          onClick={() => {
+            // make running status 1 then stop the scan after 10 seconds
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            setHostMachinesInfo((prev) => {
+              return prev?.map((machine) => {
+                if (machine.id === Number(machineId)) {
+                  return {
+                    ...machine,
+                    scanInfo: {
+                      ...machine.scanInfo,
+                      running: 1,
+                    },
+                  };
+                }
+                return machine;
+              });
+            });
+            toast.success(`Started scanning ${name}`);
+
+            setTimeout(() => {
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-ignore
+              setHostMachinesInfo((prev) => {
+                return prev?.map((machine) => {
+                  if (machine.id === Number(machineId)) {
+                    return {
+                      ...machine,
+                      scanInfo: {
+                        ...machine.scanInfo,
+                        running: 0,
+                        total: machine?.scanInfo?.total ?? 0 + 1,
+                        vulnerabilities:
+                          machine?.scanInfo?.vulnerabilities ?? 0 + 3,
+                      },
+                    };
+                  }
+                  return machine;
+                });
+              });
+              toast.success(`Done scanning ${name}`);
+            }, 20000);
+          }}
+        >
+          Scan Machine
+        </Button>
       </div>
       <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
         <StatsCard title="Scans Running" value={scanInfo?.running} />
