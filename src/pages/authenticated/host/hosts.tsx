@@ -29,8 +29,10 @@ const columns: ColumnDef<HostMachine>[] = [
     cell: ({ row }) => {
       return (
         <span
-          className={`px-2 py-1 text-xs font-semibold text-white rounded-md ${
-            row.original.status === "Online" ? "bg-green-500" : "bg-red-500"
+          className={`px-2 py-1 text-xs font-semibold rounded-md ${
+            row.original.status === "Online"
+              ? "bg-green-400/30 text-green-700"
+              : "bg-red-400/30 text-red-700"
           }`}
         >
           {row.original.status}
@@ -47,6 +49,17 @@ const columns: ColumnDef<HostMachine>[] = [
           {row.original.lastScanned
             ? new Date(row.original.lastScanned).toLocaleString()
             : "N/A"}
+        </span>
+      );
+    },
+  },
+  {
+    header: "Scan Status",
+    accessorKey: "scanStatus",
+    cell: ({ row }) => {
+      return (
+        <span className="text-sm">
+          {row.original?.scanInfo?.running ? "Running" : "Idle"}
         </span>
       );
     },

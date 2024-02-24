@@ -45,7 +45,7 @@ const Host = () => {
                     ...machine,
                     scanInfo: {
                       ...machine.scanInfo,
-                      running: 1,
+                      running: true,
                     },
                   };
                 }
@@ -65,10 +65,10 @@ const Host = () => {
                       lastScanned: new Date().toISOString(),
                       scanInfo: {
                         ...machine.scanInfo,
-                        running: 0,
-                        total: machine?.scanInfo?.total ?? 0 + 1,
+                        running: false,
+                        total: (machine?.scanInfo?.total ?? 0) + 1,
                         vulnerabilities:
-                          machine?.scanInfo?.vulnerabilities ?? 0 + 3,
+                          (machine?.scanInfo?.vulnerabilities ?? 0) + 3,
                       },
                     };
                   }
@@ -76,7 +76,7 @@ const Host = () => {
                 });
               });
               toast.success(`Done scanning ${name}`);
-            }, 20000);
+            }, 10000);
           }}
         >
           Scan Machine

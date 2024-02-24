@@ -52,7 +52,7 @@ const Dashboard = () => {
             <StatsCard title="Scans Running" value={totalRunningScans} />
             <StatsCard title="Scans Waiting" value={0} />
             <StatsCard
-              title="Open Vulnerabilities"
+              title="Vulnerabilities"
               value={totalScannedVulnerabilities}
             />
             <StatsCard title="Total Targets" value={0} />
