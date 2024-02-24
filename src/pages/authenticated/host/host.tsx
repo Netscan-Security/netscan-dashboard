@@ -62,6 +62,7 @@ const Host = () => {
                   if (machine.id === Number(machineId)) {
                     return {
                       ...machine,
+                      lastScanned: new Date().toISOString(),
                       scanInfo: {
                         ...machine.scanInfo,
                         running: 0,
@@ -82,7 +83,7 @@ const Host = () => {
         </Button>
       </div>
       <div className="grid grid-cols-1 gap-4 mt-4 md:grid-cols-2 lg:grid-cols-4">
-        <StatsCard title="Scans Running" value={scanInfo?.running} />
+        <StatsCard title="Scan Running" value={scanInfo?.running} />
         <StatsCard title="Total Scans" value={scanInfo?.total} />
         <StatsCard
           title="Open Vulnerabilities"

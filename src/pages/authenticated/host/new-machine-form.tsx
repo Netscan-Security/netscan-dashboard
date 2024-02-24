@@ -52,7 +52,7 @@ const AddNewMachine = ({ closeModal }: { closeModal: () => void }) => {
             ram: "8",
           },
           scanInfo: {
-            running: 0,
+            running: false,
             total: 0,
             vulnerabilities: 0,
             targets: 0,

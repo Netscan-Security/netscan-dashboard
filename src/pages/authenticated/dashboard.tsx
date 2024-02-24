@@ -11,7 +11,7 @@ const Dashboard = () => {
   );
 
   const totalRunningScans = hostMachinesInfo?.reduce(
-    (acc, machine) => acc + (machine.scanInfo?.running ?? 0),
+    (acc, machine) => acc + (machine.scanInfo?.running ? 1 : 0),
     0
   );
 
