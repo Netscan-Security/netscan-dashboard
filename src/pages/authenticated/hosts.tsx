@@ -1,5 +1,8 @@
+import { z } from "zod";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 import type { ColumnDef } from "@tanstack/react-table";
 
 // Local imports
@@ -13,6 +16,15 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import {
+  Form,
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
 
 const columns: ColumnDef<HostMachine>[] = [
   { header: "ID", accessorKey: "id" },
@@ -91,38 +103,80 @@ const Hosts: React.FC = () => {
   );
 };
 
+const machineFormSchema = z.object({
+  name: z.string({
+    required_error: "Name is required",
+    invalid_type_error: "Name must be a string",
+  }),
+  ipAddress: z.string().ip("Invalid IP Address"),
+});
+
 const AddNewMachine = () => {
+  const form = useForm<z.infer<typeof machineFormSchema>>({
+    resolver: zodResolver(machineFormSchema),
+    defaultValues: {
+      name: "",
+      ipAddress: "",
+    },
+  });
+
+  function onSubmit(values: z.infer<typeof machineFormSchema>) {
+    console.log(values);
+  }
+
   return (
     <>
-      <div className="p-6">
+      <div className="p-2">
         <h1 className="mb-4 text-2xl font-bold">Add Host</h1>
-        <form className="space-y-3">
-          <div>
-            <label className="block text-sm font-semibold" htmlFor="name">
-              Name
-            </label>
-            <Input
-              type="text"
-              id="name"
+        <Form {...form}>
+          <form
+            id="HostMachineForm"
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="space-y-8"
+          >
+            <FormField
+              control={form.control}
               name="name"
-              // className="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Name</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  {form.formState.errors.name?.message ? (
+                    <FormMessage />
+                  ) : (
+                    <FormDescription>
+                      Enter the name of the host
+                    </FormDescription>
+                  )}
+                </FormItem>
+              )}
             />
-          </div>
-          <div>
-            <label className="block text-sm font-semibold" htmlFor="ipAddress">
-              IP Address
-            </label>
-            <Input
-              type="text"
-              id="ipAddress"
+            <FormField
+              control={form.control}
               name="ipAddress"
-              // className="border-gray-300 rounded-md w- full focus:border-blue-500 focus:ring focus:ring-blue-200"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>IP Address</FormLabel>
+                  <FormControl>
+                    <Input {...field} />
+                  </FormControl>
+                  {form.formState.errors.ipAddress?.message ? (
+                    <FormMessage />
+                  ) : (
+                    <FormDescription>
+                      Enter the IP Address of the host
+                    </FormDescription>
+                  )}
+                </FormItem>
+              )}
             />
-          </div>
-        </form>
+          </form>
+        </Form>
       </div>
       <DialogFooter>
-        <Button variant="default">Add</Button>
+        <Button form="HostMachineForm">Add</Button>
       </DialogFooter>
     </>
   );
