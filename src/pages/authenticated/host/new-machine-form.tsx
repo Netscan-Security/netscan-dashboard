@@ -16,6 +16,7 @@ import {
   FormLabel,
   FormMessage,
 } from "@/components/ui/form";
+import { toast } from "sonner";
 
 const machineFormSchema = z.object({
   name: z.string({
@@ -54,6 +55,9 @@ const AddNewMachine = ({ closeModal }: { closeModal: () => void }) => {
       ];
     });
     closeModal();
+    toast.success("Host machine added successfully", {
+      position: "top-center",
+    });
   }
 
   return (
