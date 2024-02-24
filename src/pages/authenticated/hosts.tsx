@@ -1,10 +1,18 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import type { ColumnDef } from "@tanstack/react-table";
 
 // Local imports
-import { DataTable } from "@/components/ui/table/data-table";
-import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { hostMachines } from "@/services/mockData";
+import { DataTable } from "@/components/ui/table/data-table";
+import {
+  Dialog,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const columns: ColumnDef<HostMachine>[] = [
   { header: "ID", accessorKey: "id" },
@@ -53,11 +61,21 @@ const columns: ColumnDef<HostMachine>[] = [
 const Hosts: React.FC = () => {
   return (
     <>
-      <div className="mb-4">
-        <h1 className="text-4xl font-semibold">Hosts</h1>
-        <p className="text-lg">
-          The agents that are installed in different machines
-        </p>
+      <div className="flex items-center justify-between mb-4">
+        <div>
+          <h1 className="text-4xl font-semibold">Hosts</h1>
+          <p className="text-lg">
+            The agents that are installed in different machines
+          </p>
+        </div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button variant="default">Add Host</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <AddNewMachine />
+          </DialogContent>
+        </Dialog>
       </div>
       <DataTable
         columns={columns}
@@ -69,6 +87,43 @@ const Hosts: React.FC = () => {
           status: machine.status,
         }))}
       />
+    </>
+  );
+};
+
+const AddNewMachine = () => {
+  return (
+    <>
+      <div className="p-6">
+        <h1 className="mb-4 text-2xl font-bold">Add Host</h1>
+        <form className="space-y-3">
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="name">
+              Name
+            </label>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              // className="w-full border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-semibold" htmlFor="ipAddress">
+              IP Address
+            </label>
+            <Input
+              type="text"
+              id="ipAddress"
+              name="ipAddress"
+              // className="border-gray-300 rounded-md w- full focus:border-blue-500 focus:ring focus:ring-blue-200"
+            />
+          </div>
+        </form>
+      </div>
+      <DialogFooter>
+        <Button variant="default">Add</Button>
+      </DialogFooter>
     </>
   );
 };

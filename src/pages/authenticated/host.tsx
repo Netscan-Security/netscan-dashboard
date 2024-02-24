@@ -1,10 +1,10 @@
+import { ArrowLeft } from "lucide-react";
 import { useNavigate, useParams } from "react-router-dom";
 
 // Local imports
-import { hostMachines } from "@/services/mockData";
-import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import StatsCard from "@/components/stats-card";
+import { hostMachines } from "@/services/mockData";
 
 const Host = () => {
   const navigate = useNavigate();
@@ -60,5 +60,4 @@ const Host = () => {
     </div>
   );
 };
-
 export default Host;
