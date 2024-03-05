@@ -36,4 +36,5 @@ type Vulnerability = {
   }[];
   date: string;
   status: string;
+  details?: string;
 };

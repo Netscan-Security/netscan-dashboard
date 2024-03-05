@@ -10,6 +10,7 @@ import ErrorPage from "./components/templates/error";
 import Dashboard from "./pages/authenticated/dashboard";
 import NotFoundPage from "./components/templates/not-found";
 import Vulnerabilities from "./pages/authenticated/vulnerabilities";
+import VulnerabilityPage from "./pages/authenticated/vulnerabilities/vulnerability";
 
 function App() {
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ function App() {
         {
           path: "/vulnerabilities",
           element: <Vulnerabilities />,
+        },
+        {
+          path: "/vulnerabilities/:vulnerabilityId",
+          element: <VulnerabilityPage />,
         },
       ],
     },
