@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState } from "react";
 
-import { hostMachines } from "../mockData";
+import { hostMachines } from "../mock-data/host-machines";
 
 // Define the host machine context
 interface HostMachineContextType {
