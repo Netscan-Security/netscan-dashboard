@@ -33,7 +33,7 @@ type Vulnerability = {
   host: {
     id: number;
     name: string;
-  };
-  scanDate: string;
+  }[];
+  date: string;
   status: string;
 };

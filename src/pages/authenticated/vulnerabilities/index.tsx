@@ -51,21 +51,34 @@ const vulnerabilitiesColumns: ColumnDef<Vulnerability>[] = [
     header: "Host",
     accessorKey: "host",
     cell: ({ row }) => {
+      const hosts = row.original.host.slice(0, 2);
+      const remaining = row.original.host.length - 2;
       return (
-        <Link to={`/hosts/${row.original.host.id}`} className="text-blue-600">
-          {row.original.host.name}
-        </Link>
+        <div className="flex items-center gap-2">
+          {hosts.map((host) => (
+            <Link
+              key={host.id}
+              to={`/hosts/${host.id}`}
+              className="text-sm text-blue-600 hover:underline"
+            >
+              {host.name},
+            </Link>
+          ))}
+          {remaining > 0 && (
+            <span className="text-sm text-gray-500">+{remaining}</span>
+          )}
+        </div>
       );
     },
   },
   {
-    header: "Scan Date",
-    accessorKey: "scanDate",
+    header: "Date",
+    accessorKey: "date",
     cell: ({ row }) => {
       return (
         <span className="text-sm">
-          {row.original.scanDate
-            ? new Date(row.original.scanDate).toLocaleString()
+          {row.original.date
+            ? new Date(row.original.date).toLocaleDateString()
             : "N/A"}
         </span>
       );
@@ -99,7 +112,7 @@ const Vulnerabilities = () => {
     setTimeout(() => {
       setVulnerabilities(vulnerabilityMockData);
       setIsLoading(false);
-    }, 5000);
+    }, 1000);
   }, []);
 
   return (
