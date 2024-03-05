@@ -43,6 +43,14 @@ const hostMachines: HostMachine[] = [
     machineSpecs: { cpu: "Intel Core i3", ram: "4", os: "Windows 10" },
     scanInfo: { running: false, total: 0, vulnerabilities: 0, targets: 0 },
   },
+  {
+    id: 4,
+    name: "Neurotech HP",
+    ipAddress: "192.168.1.123",
+    status: "Online",
+    machineSpecs: { cpu: "Intel Core i9", ram: "32", os: "Windows 11" },
+    scanInfo: { running: false, total: 0, vulnerabilities: 0, targets: 0 },
+  },
 ];
 
 export { hostMachines };
