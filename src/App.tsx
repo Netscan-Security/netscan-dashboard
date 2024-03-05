@@ -3,7 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Local imports
 import SignInPage from "./pages/sign-in";
 import Sidebar from "./layouts/side-bar";
-import Host from "./pages/authenticated/host/host";
+import Host from "./pages/authenticated/host";
 import Targets from "./pages/authenticated/targets";
 import Hosts from "./pages/authenticated/host/hosts";
 import ErrorPage from "./components/templates/error";
