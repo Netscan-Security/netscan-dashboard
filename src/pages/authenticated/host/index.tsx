@@ -46,7 +46,7 @@ const Host = () => {
           <ArrowLeftIcon size={24} className="mr-1" />
           Back
         </Button>
-        <h1 className="text-lg font-semibold md:text-2xl">Machine 001</h1>
+        <h1 className="text-lg font-semibold md:text-2xl">{name}</h1>
         <Button
           className="ml-auto"
           size="sm"
