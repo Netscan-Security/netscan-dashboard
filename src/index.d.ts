@@ -25,3 +25,15 @@ type HostMachine = {
     targets: number;
   };
 };
+
+type Vulnerability = {
+  id: number;
+  name: string;
+  severity: "Low" | "Medium" | "High" | "Critical";
+  host: {
+    id: number;
+    name: string;
+  };
+  scanDate: string;
+  status: string;
+};
