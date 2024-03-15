@@ -1,11 +1,14 @@
 import { z } from "zod";
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { Link, useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Local imports
 import { NetScanIcon } from "@/assets/brand";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { useAuth } from "@/shared/context/auth";
 import { Checkbox } from "@/components/ui/checkbox";
 import NetScanRipplePattern from "@/components/ui/ripple-pattern";
 import {
@@ -18,19 +21,37 @@ import {
 } from "@/components/ui/form";
 
 const schema = z.object({
-  email: z.string().email(),
-  password: z.string().min(6),
+  email: z.string().min(1, "Email is required").email(),
+  password: z.string().min(1, "Password is required"),
   remember30days: z.boolean(),
 });
 
 type FormData = z.infer<typeof schema>;
 
 const SignInPage: React.FC = () => {
-  const form = useForm<FormData>();
+  const { login } = useAuth();
+  const navigate = useNavigate();
+  const [error, setError] = useState<string>("");
+  const [loading, setLoading] = useState<boolean>(false);
+
+  const form = useForm<FormData>({
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: "",
+      password: "",
+      remember30days: false,
+    },
+  });
 
   const onSubmit = (data: z.infer<typeof schema>) => {
-    // Handle form submission here
-    console.log(data);
+    setError("");
+    setLoading(true);
+    login(data.email, data.password, data.remember30days)
+      .then(() => navigate("/"))
+      .catch((err) => {
+        setError(err?.message || "Login failed");
+        setLoading(false);
+      });
   };
 
   return (
@@ -44,16 +65,25 @@ const SignInPage: React.FC = () => {
           <h1 className="mb-4 text-3xl font-bold">Sign In</h1>
           <p className="mb-4">Welcome! Please enter your details.</p>
         </div>
+        {error && (
+          <div className="px-4 py-2 mb-4 text-sm text-red-600 bg-red-100 rounded-md">
+            {error}
+          </div>
+        )}
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
             <FormField
               control={form.control}
               name="email"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>Email</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter Your Email" {...field} />
+                    <Input
+                      disabled={loading}
+                      placeholder="Enter Your Email"
+                      {...form.register("email")}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -62,11 +92,17 @@ const SignInPage: React.FC = () => {
             <FormField
               control={form.control}
               name="password"
-              render={({ field }) => (
+              render={() => (
                 <FormItem>
                   <FormLabel>Password</FormLabel>
                   <FormControl>
-                    <Input placeholder="Password" type="password" {...field} />
+                    <Input
+                      disabled={loading}
+                      placeholder="Password"
+                      type="password"
+                      required
+                      {...form.register("password")}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -81,6 +117,7 @@ const SignInPage: React.FC = () => {
                   <div className="flex items-center space-x-3">
                     <FormControl>
                       <Checkbox
+                        disabled={loading}
                         checked={field.value}
                         onCheckedChange={field.onChange}
                       />
@@ -96,8 +133,8 @@ const SignInPage: React.FC = () => {
                 </FormItem>
               )}
             />
-            <Button type="submit" className="w-full">
-              Sign In
+            <Button type="submit" className="w-full" disabled={loading}>
+              {loading ? "Loading..." : "Sign In"}
             </Button>
             <p className="text-sm text-center">
               Copyright ©{new Date().getFullYear()}{" "}

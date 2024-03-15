@@ -4,7 +4,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 
 // Local imports
 import { DataTable } from "@/components/ui/table/data-table";
-import { vulnerabilityMockData } from "@/services/mock-data/vulnerability";
+import { vulnerabilityMockData } from "@/shared/mock-data/vulnerability";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { BugIcon } from "lucide-react";

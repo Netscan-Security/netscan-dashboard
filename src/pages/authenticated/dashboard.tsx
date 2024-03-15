@@ -1,6 +1,6 @@
 import StatsCard from "@/components/stats-card";
 import DashboardCard from "@/components/dashboard-card";
-import { useHostMachines } from "@/services/context/host-machines";
+import { useHostMachines } from "@/shared/context/host-machines";
 
 const Dashboard = () => {
   const { hostMachinesInfo } = useHostMachines();

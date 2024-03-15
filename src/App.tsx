@@ -1,8 +1,8 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 
 // Local imports
+import Root from "./layouts/root";
 import SignInPage from "./pages/sign-in";
-import Sidebar from "./layouts/side-bar";
 import Host from "./pages/authenticated/host";
 import Targets from "./pages/authenticated/targets";
 import Hosts from "./pages/authenticated/host/hosts";
@@ -16,7 +16,7 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Sidebar />,
+      element: <Root />,
       errorElement: <ErrorPage />,
       children: [
         {

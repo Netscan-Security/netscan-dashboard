@@ -10,7 +10,7 @@ import {
 // Local imports
 import { Button } from "@/components/ui/button";
 // import StatsCard from "@/components/stats-card";
-import { useHostMachines } from "@/services/context/host-machines";
+import { useHostMachines } from "@/shared/context/host-machines";
 import {
   Card,
   CardContent,

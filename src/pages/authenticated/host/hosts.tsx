@@ -6,7 +6,7 @@ import type { ColumnDef } from "@tanstack/react-table";
 import AddNewMachine from "./new-machine-form";
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/table/data-table";
-import { useHostMachines } from "@/services/context/host-machines";
+import { useHostMachines } from "@/shared/context/host-machines";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const columns: ColumnDef<HostMachine>[] = [
