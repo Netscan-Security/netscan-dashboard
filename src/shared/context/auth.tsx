@@ -63,6 +63,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       });
     } else {
       setLoading(false);
+      logout();
     }
   }, []);
 
@@ -89,14 +90,15 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
 
     // Once the login is successful, update the user state
-    console.log(
+    const userData =
       (response.data as User).user ||
-        (await getUserData((response.data as User).access_token))
-    );
-    setUser(
-      (response.data as User).user ||
-        (await getUserData((response.data as User).access_token))
-    );
+      (await getUserData((response.data as User).access_token));
+
+    if (!userData) {
+      throw new Error("Incorrect email or password");
+    }
+
+    setUser(userData);
     saveToken(
       (response.data as User).access_token,
       remember30Days ? "2592000000" : undefined
