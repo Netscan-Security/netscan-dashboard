@@ -12,6 +12,7 @@ import Dashboard from "./pages/authenticated/dashboard";
 import NotFoundPage from "./components/templates/not-found";
 import Vulnerabilities from "./pages/authenticated/vulnerabilities";
 import VulnerabilityPage from "./pages/authenticated/vulnerabilities/vulnerability";
+import RegisterPage from "./pages/register";
 
 function App() {
   const router = createBrowserRouter([
@@ -53,6 +54,10 @@ function App() {
     {
       path: "/sign-in",
       element: <SignInPage />,
+    },
+    {
+      path: "/register",
+      element: <RegisterPage />,
     },
     {
       path: "*",

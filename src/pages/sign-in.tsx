@@ -136,12 +136,20 @@ const SignInPage: React.FC = () => {
             <Button type="submit" className="w-full" disabled={loading}>
               {loading ? "Loading..." : "Sign In"}
             </Button>
-            <p className="text-sm text-center">
-              Copyright ©{new Date().getFullYear()}{" "}
-              <span className="font-semibold text-blue-600">
-                NetScan Security
-              </span>
-            </p>
+            <div className="flex flex-col items-center space-y-3">
+              <p className="text-sm text-center">
+                Copyright ©{new Date().getFullYear()}{" "}
+                <span className="font-semibold text-blue-600">
+                  NetScan Security
+                </span>
+              </p>
+              <Link
+                to="/register"
+                className="text-sm font-semibold text-blue-600 hover:underline"
+              >
+                Register Netscan Account
+              </Link>
+            </div>
           </form>
         </Form>
       </div>
