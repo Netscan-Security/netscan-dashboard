@@ -67,19 +67,19 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
   }, []);
 
   /**
-   * Logs in the user with the provided username and password.
+   * Logs in the user with the provided email and password.
    *
-   * @param {string} username - The username of the user.
+   * @param {string} email - The email of the user.
    * @param {string} password - The password of the user.
    * @returns {Promise<void>} - A promise that resolves once the login is successful.
    */
   const login = async (
-    username: string,
+    email: string,
     password: string,
     remember30Days: boolean
   ): Promise<void> => {
     const response = await api.post(`${API_URL}${LOGIN_ENDPOINT}`, {
-      username,
+      email,
       password,
     });
 
@@ -89,6 +89,10 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
 
     // Once the login is successful, update the user state
+    console.log(
+      (response.data as User).user ||
+        (await getUserData((response.data as User).access_token))
+    );
     setUser(
       (response.data as User).user ||
         (await getUserData((response.data as User).access_token))
