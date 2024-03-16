@@ -92,6 +92,8 @@ const Hosts: React.FC = () => {
       </div>
       {hostMachinesInfo && (
         <DataTable
+          headerClassname="bg-neutral-100"
+          className="bg-white border"
           columns={columns}
           data={hostMachinesInfo.map((machine) => ({
             id: machine.id,

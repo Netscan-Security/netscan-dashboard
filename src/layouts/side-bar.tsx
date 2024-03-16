@@ -8,6 +8,7 @@ import {
   LogOut,
   Settings,
   PcCase,
+  User2,
 } from "lucide-react";
 
 // Local imports
@@ -19,6 +20,11 @@ const Sidebar: React.FC = () => {
       name: "Dashboard",
       icon: BarChartBig,
       path: "/",
+    },
+    {
+      name: "Users",
+      icon: User2,
+      path: "/users",
     },
     {
       name: "Hosts",

@@ -4,6 +4,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import Root from "./layouts/root";
 import SignInPage from "./pages/sign-in";
 import Host from "./pages/authenticated/host";
+import { Users } from "./pages/authenticated/users";
 import Targets from "./pages/authenticated/targets";
 import Hosts from "./pages/authenticated/host/hosts";
 import ErrorPage from "./components/templates/error";
@@ -22,6 +23,10 @@ function App() {
         {
           index: true,
           element: <Dashboard />,
+        },
+        {
+          path: "/users",
+          element: <Users />,
         },
         {
           path: "/targets",
