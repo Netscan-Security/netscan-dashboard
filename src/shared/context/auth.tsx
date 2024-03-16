@@ -1,10 +1,4 @@
-import {
-  PropsWithChildren,
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { PropsWithChildren, createContext, useEffect, useState } from "react";
 
 // Local imports
 import api from "../config/api";
@@ -16,7 +10,7 @@ import { getToken, removeToken, saveToken } from "../services/token";
 const LOGIN_ENDPOINT = "/auth/login";
 const USERDATA_ENDPOINT = "/profile";
 
-interface AuthContextProps {
+export interface AuthContextProps {
   user: UserData | null;
   loading: boolean;
   login: (
@@ -28,16 +22,14 @@ interface AuthContextProps {
 }
 
 // Create the auth context
-const AuthContext = createContext<AuthContextProps>({
+export const AuthContext = createContext<AuthContextProps>({
   user: null,
   loading: true,
   login: async () => {},
   logout: () => {},
 });
 
-// Create a custom hook to access the auth context
-// eslint-disable-next-line react-refresh/only-export-components
-export const useAuth = (): AuthContextProps => useContext(AuthContext);
+// Create a custom hook to access the auth useContext
 
 const getUserData = async (token: string) => {
   const response = await api.get(
@@ -91,8 +83,10 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       password,
     });
 
-    if (!response.ok)
-      throw new Error(response.originalError?.message || "Login failed");
+    if (!response.ok) {
+      console.error(response.originalError?.message);
+      throw new Error("Login failed");
+    }
 
     // Once the login is successful, update the user state
     setUser(

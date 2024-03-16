@@ -1,7 +1,7 @@
 import { Navigate } from "react-router-dom";
 
 // Local imports
-import { useAuth } from "@/shared/context/auth";
+import { useAuth } from "@/shared/hooks/use-auth";
 
 // Local imports
 import Sidebar from "./side-bar";

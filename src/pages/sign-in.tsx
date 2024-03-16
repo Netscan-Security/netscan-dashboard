@@ -8,7 +8,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { NetScanIcon } from "@/assets/brand";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { useAuth } from "@/shared/context/auth";
+import { useAuth } from "@/shared/hooks/use-auth";
 import { Checkbox } from "@/components/ui/checkbox";
 import NetScanRipplePattern from "@/components/ui/ripple-pattern";
 import {
@@ -49,7 +49,7 @@ const SignInPage: React.FC = () => {
     login(data.email, data.password, data.remember30days)
       .then(() => navigate("/"))
       .catch((err) => {
-        setError(err?.message || "Login failed");
+        setError(err?.message);
         setLoading(false);
       });
   };
