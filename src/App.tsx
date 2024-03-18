@@ -3,6 +3,7 @@ import { RouterProvider, createBrowserRouter } from "react-router-dom";
 // Local imports
 import Root from "./layouts/root";
 import SignInPage from "./pages/sign-in";
+import RegisterPage from "./pages/register";
 import Host from "./pages/authenticated/host";
 import { Users } from "./pages/authenticated/users";
 import Targets from "./pages/authenticated/targets";
@@ -12,7 +13,6 @@ import Dashboard from "./pages/authenticated/dashboard";
 import NotFoundPage from "./components/templates/not-found";
 import Vulnerabilities from "./pages/authenticated/vulnerabilities";
 import VulnerabilityPage from "./pages/authenticated/vulnerabilities/vulnerability";
-import RegisterPage from "./pages/register";
 
 function App() {
   const router = createBrowserRouter([
