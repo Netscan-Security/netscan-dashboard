@@ -3,7 +3,6 @@ import { NavLink, Outlet } from "react-router-dom";
 import {
   BarChartBig,
   Bug,
-  Crosshair,
   LifeBuoy,
   LogOut,
   Settings,
@@ -33,11 +32,6 @@ const Sidebar: React.FC = () => {
       name: "Hosts",
       icon: PcCase,
       path: "/hosts",
-    },
-    {
-      name: "Targets",
-      icon: Crosshair,
-      path: "/targets",
     },
     {
       name: "Vulnerabilities",

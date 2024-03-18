@@ -6,7 +6,6 @@ import SignInPage from "./pages/sign-in";
 import RegisterPage from "./pages/register";
 import Host from "./pages/authenticated/host";
 import { Users } from "./pages/authenticated/users";
-import Targets from "./pages/authenticated/targets";
 import Hosts from "./pages/authenticated/host/hosts";
 import ErrorPage from "./components/templates/error";
 import Dashboard from "./pages/authenticated/dashboard";
@@ -28,10 +27,6 @@ function App() {
         {
           path: "/users",
           element: <Users />,
-        },
-        {
-          path: "/targets",
-          element: <Targets />,
         },
         {
           path: "/hosts",
