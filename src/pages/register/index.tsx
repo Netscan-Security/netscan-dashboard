@@ -37,7 +37,7 @@ type FormData = z.infer<typeof adminSchema>;
 const RegisterPage = () => {
   const { signup } = useAuth();
   const [organizationRegister, setOrganizationRegister] =
-    useState<UserData | null>("da");
+    useState<UserData | null>(null);
   const form = useForm<FormData>({
     resolver: zodResolver(adminSchema),
     defaultValues: {
