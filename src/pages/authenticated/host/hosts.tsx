@@ -91,22 +91,26 @@ const Hosts: React.FC = () => {
           </DialogContent>
         </Dialog>
       </div>
-      {hosts && hosts?.length > 0 && (
+      {
         <DataTable
           headerClassname="bg-neutral-100"
           className="bg-white border"
           columns={columns}
-          loading={isLoading || isRefetching}
+          loading={isLoading || isRefetching || !hosts}
           // @ts-expect-error: alot of data here
-          data={hosts.map((machine) => ({
-            id: machine.id,
-            name: machine.name,
-            ipAddress: machine.ipAddress,
-            lastScanned: machine.updatedAt,
-            status: machine.status,
-          }))}
+          data={
+            hosts && hosts.length > 0
+              ? hosts.map((machine) => ({
+                  id: machine.id,
+                  name: machine.name,
+                  ipAddress: machine.ipAddress,
+                  lastScanned: machine.updatedAt,
+                  status: machine.status,
+                }))
+              : []
+          }
         />
-      )}
+      }
     </>
   );
 };

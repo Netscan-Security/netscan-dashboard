@@ -24,3 +24,20 @@ export const useHosts = () => {
     }
   );
 };
+
+export const useHost = (id: string) => {
+  return useQuery(
+    ["host", id],
+    async () => {
+      const response = await api.get(`${API_URL}/host/${id}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch host");
+      }
+      return response.data as Host;
+    },
+    {
+      refetchOnWindowFocus: false,
+      refetchOnMount: false,
+    }
+  );
+};
