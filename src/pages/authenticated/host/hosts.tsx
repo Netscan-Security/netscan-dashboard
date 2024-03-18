@@ -5,11 +5,11 @@ import type { ColumnDef } from "@tanstack/react-table";
 // Local imports
 import AddNewMachine from "./new-machine-form";
 import { Button } from "@/components/ui/button";
+import { useHosts } from "@/shared/services/host";
 import { DataTable } from "@/components/ui/table/data-table";
-import { useHostMachines } from "@/shared/context/host-machines";
 import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
-const columns: ColumnDef<HostMachine>[] = [
+const columns: ColumnDef<Host>[] = [
   { header: "ID", accessorKey: "id" },
   {
     header: "Name",
@@ -30,7 +30,7 @@ const columns: ColumnDef<HostMachine>[] = [
       return (
         <span
           className={`px-2 py-1 text-xs font-semibold rounded-md ${
-            row.original.status === "Online"
+            row.original.status === "online"
               ? "bg-green-400/30 text-green-700"
               : "bg-red-400/30 text-red-700"
           }`}
@@ -46,28 +46,29 @@ const columns: ColumnDef<HostMachine>[] = [
     cell: ({ row }) => {
       return (
         <span className="text-sm">
-          {row.original.lastScanned
-            ? new Date(row.original.lastScanned).toLocaleString()
+          {row.original.updatedAt
+            ? new Date(row.original.updatedAt).toLocaleString()
             : "N/A"}
         </span>
       );
     },
   },
-  {
-    header: "Scan Status",
-    accessorKey: "scanStatus",
-    cell: ({ row }) => {
-      return (
-        <span className="text-sm">
-          {row.original?.scanInfo?.running ? "Running" : "Idle"}
-        </span>
-      );
-    },
-  },
+  // {
+  //   header: "Scan Status",
+  //   accessorKey: "scanStatus",
+  //   cell: ({ row }) => {
+  //     return (
+  //       <span className="text-sm">
+  //         {row.original?.scanInfo?.running ? "Running" : "Idle"}
+  //       </span>
+  //     );
+  //   },
+  // },
 ];
 
 const Hosts: React.FC = () => {
-  const { hostMachinesInfo } = useHostMachines();
+  // const { hostMachinesInfo } = useHostMachines();
+  const { data: hosts, isLoading, isRefetching } = useHosts();
   const [openModal, setOpenModal] = useState(false);
 
   return (
@@ -90,16 +91,18 @@ const Hosts: React.FC = () => {
           </DialogContent>
         </Dialog>
       </div>
-      {hostMachinesInfo && (
+      {hosts && hosts?.length > 0 && (
         <DataTable
           headerClassname="bg-neutral-100"
           className="bg-white border"
           columns={columns}
-          data={hostMachinesInfo.map((machine) => ({
+          loading={isLoading || isRefetching}
+          // @ts-expect-error: alot of data here
+          data={hosts.map((machine) => ({
             id: machine.id,
             name: machine.name,
             ipAddress: machine.ipAddress,
-            lastScanned: machine.lastScanned,
+            lastScanned: machine.updatedAt,
             status: machine.status,
           }))}
         />
