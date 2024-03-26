@@ -1,12 +1,12 @@
-import { useState } from "react";
 import type { ColumnDef } from "@tanstack/react-table";
 
 // Local imports
 import { Button } from "@/components/ui/button";
 import { DataTable } from "@/components/ui/table/data-table";
 import { UserData } from "@/shared/types/user";
+import { useUsers } from "@/shared/services/user";
 
-const usersColumns: ColumnDef<Omit<UserData, "imageUrl" | "role">>[] = [
+const usersColumns: ColumnDef<UserData>[] = [
   {
     header: "ID",
     accessorKey: "id",
@@ -51,17 +51,7 @@ const usersColumns: ColumnDef<Omit<UserData, "imageUrl" | "role">>[] = [
 ];
 
 export const Users = () => {
-  const [users] = useState<Omit<UserData, "imageUrl" | "role">[]>([
-    {
-      id: "1",
-      firstName: "John",
-      lastName: "Doe",
-      username: "john_doe",
-      email: "john_doe@mail.com",
-      contactNumber: "1234567890",
-      hasHost: true,
-    },
-  ]);
+  const { data: users, isLoading } = useUsers();
 
   return (
     <div>
@@ -79,7 +69,8 @@ export const Users = () => {
         headerClassname="bg-neutral-100"
         className="bg-white border"
         columns={usersColumns}
-        data={users}
+        loading={isLoading}
+        data={users ? users : []}
       />
     </div>
   );

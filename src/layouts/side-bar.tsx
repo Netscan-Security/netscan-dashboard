@@ -1,9 +1,8 @@
-import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { NavLink, Outlet } from "react-router-dom";
 import {
   BarChartBig,
   Bug,
-  Crosshair,
   LifeBuoy,
   LogOut,
   Settings,
@@ -12,7 +11,10 @@ import {
 } from "lucide-react";
 
 // Local imports
+import { Button } from "@/components/ui/button";
+import { useAuth } from "@/shared/hooks/use-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog";
 
 const Sidebar: React.FC = () => {
   const sidebarData = [
@@ -30,11 +32,6 @@ const Sidebar: React.FC = () => {
       name: "Hosts",
       icon: PcCase,
       path: "/hosts",
-    },
-    {
-      name: "Targets",
-      icon: Crosshair,
-      path: "/targets",
     },
     {
       name: "Vulnerabilities",
@@ -152,26 +149,51 @@ const Sidebar: React.FC = () => {
 };
 
 const SidebarAccount = () => {
-  const navigate = useNavigate();
+  const { user, logout } = useAuth();
+  const [openModal, setOpenModal] = useState(false);
+
   return (
     <div className="flex items-center gap-3 py-3 border-t">
       <Avatar>
-        <AvatarImage src="https://avatars.githubusercontent.com/u/22730819?v=4" />
-        <AvatarFallback>JM</AvatarFallback>
+        <AvatarImage src={user?.imageUrl} />
+        <AvatarFallback>
+          {`${user?.firstName?.[0]}${user?.lastName?.[0]}`}
+        </AvatarFallback>
       </Avatar>
       <div className="hidden sm:block">
-        <h2 className="text-sm font-semibold">Jackson Makinda</h2>
-        <p className="text-xs">jackson@netscan.security </p>
+        <h2 className="text-sm font-semibold">{`${user?.firstName} ${user?.lastName}`}</h2>
+        <p className="text-xs">{user?.email}</p>
       </div>
-      <LogOut
-        onClick={() => {
-          const logout = confirm("Are you sure you want to logout?");
-          if (logout) {
-            navigate("/sign-in");
-          }
-        }}
-        className="hidden ml-5 text-red-600 cursor-pointer sm:block"
-      />
+      <Dialog open={openModal} onOpenChange={(open) => setOpenModal(open)}>
+        <DialogTrigger asChild>
+          <LogOut
+            onClick={() => setOpenModal(true)}
+            className="hidden ml-5 text-red-600 cursor-pointer sm:block"
+          />
+        </DialogTrigger>
+        <DialogContent>
+          <div className="flex flex-col items-center gap-4">
+            <h2 className="text-xl font-semibold">Logout</h2>
+            <p className="text-sm text-center">
+              Are you sure you want to logout?
+            </p>
+            <div className="flex items-center gap-4">
+              <Button
+                variant="destructive"
+                onClick={() => {
+                  logout();
+                  setOpenModal(false);
+                }}
+              >
+                Logout
+              </Button>
+              <Button variant="secondary" onClick={() => setOpenModal(false)}>
+                Cancel
+              </Button>
+            </div>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };

@@ -1,8 +1,10 @@
 import StatsCard from "@/components/stats-card";
+import { useAuth } from "@/shared/hooks/use-auth";
 import DashboardCard from "@/components/dashboard-card";
 import { useHostMachines } from "@/shared/context/host-machines";
 
 const Dashboard = () => {
+  const { user } = useAuth();
   const { hostMachinesInfo } = useHostMachines();
 
   const totalScannedVulnerabilities = hostMachinesInfo?.reduce(
@@ -20,7 +22,7 @@ const Dashboard = () => {
       <div className="flex flex-col justify-between gap-1 space-y-3 md:gap-4 lg:gap-0 sm:space-y-0 lg:items-center lg:flex-row">
         <div>
           <h1 className="text-4xl font-semibold">Dashboard</h1>
-          <p className="text-lg">Welcome admin, Jackson</p>
+          <p className="text-lg">Welcome admin, {user?.firstName}</p>
         </div>
         <DaysFilter />
       </div>

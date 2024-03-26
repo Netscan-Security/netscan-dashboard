@@ -7,6 +7,27 @@ interface Pagination {
   fetching: boolean;
 }
 
+type Host = {
+  id: string;
+  name: string;
+  userId: string;
+  adminId: string;
+  roomId: string;
+  cpu: string;
+  memory: string;
+  gpu: string;
+  hardDisk: string;
+  os: string;
+  rawInfo: string;
+  model: string;
+  ipAddress: string;
+  createdAt: string;
+  updatedAt: string;
+  onboardingStage: string;
+  vpnConfig: string | null;
+  status: "offline" | "online";
+};
+
 type HostMachine = {
   id: number;
   name: string;

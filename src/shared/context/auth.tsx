@@ -9,6 +9,7 @@ import { getToken, removeToken, saveToken } from "../services/token";
 
 const LOGIN_ENDPOINT = "/auth/login";
 const USERDATA_ENDPOINT = "/profile";
+const SIGNUP_ENDPOINT = "/auth/signup-admin";
 
 export interface AuthContextProps {
   user: UserData | null;
@@ -19,7 +20,18 @@ export interface AuthContextProps {
     remember30Days: boolean
   ) => Promise<void>;
   logout: () => void;
+  signup: (data: SignupType) => Promise<UserData>;
 }
+
+type SignupType = {
+  firstName: string;
+  lastName: string;
+  username: string;
+  email: string;
+  contactNumber: string;
+  password: string;
+  imageUrl?: string;
+};
 
 // Create the auth context
 export const AuthContext = createContext<AuthContextProps>({
@@ -27,6 +39,7 @@ export const AuthContext = createContext<AuthContextProps>({
   loading: true,
   login: async () => {},
   logout: () => {},
+  signup: async () => ({} as UserData),
 });
 
 // Create a custom hook to access the auth useContext
@@ -63,6 +76,7 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
       });
     } else {
       setLoading(false);
+      logout();
     }
   }, []);
 
@@ -89,14 +103,15 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     }
 
     // Once the login is successful, update the user state
-    console.log(
+    const userData =
       (response.data as User).user ||
-        (await getUserData((response.data as User).access_token))
-    );
-    setUser(
-      (response.data as User).user ||
-        (await getUserData((response.data as User).access_token))
-    );
+      (await getUserData((response.data as User).access_token));
+
+    if (!userData) {
+      throw new Error("Incorrect email or password");
+    }
+
+    setUser(userData);
     saveToken(
       (response.data as User).access_token,
       remember30Days ? "2592000000" : undefined
@@ -108,11 +123,28 @@ const AuthProvider = ({ children }: PropsWithChildren) => {
     removeToken();
   };
 
+  const signup = async (data: SignupType) => {
+    const response = await api.post(`${API_URL}${SIGNUP_ENDPOINT}`, {
+      ...data,
+      role: "admin",
+      hasHost: false,
+    });
+
+    if (!response.ok) {
+      console.error(response.originalError?.message);
+      throw new Error("Signup failed");
+    }
+
+    saveToken((response.data as User).access_token);
+    return response.data as UserData;
+  };
+
   const authContextValue: AuthContextProps = {
     user,
     loading,
     login,
     logout,
+    signup,
   };
 
   return (
